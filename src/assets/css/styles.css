@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+}
+
+a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.cursor-pointer {
+    cursor: pointer
+}
+
+.font-size-20 {
+    font-size: 20px;
+}
+
+.font-size-22 {
+    font-size: 22px;
+}
+
+.font-size-72 {
+    font-size: 72px;
+}
+
+.color-fff {
+    color: #ffffff;
+}
+
+
+.justify-left {
+    display: flex;
+    justify-content: left
+}
+
+.justify-start {
+    display: flex;
+    justify-content: flex-start
+}
+
+.justify-right {
+    display: flex;
+    justify-content: right
+}
+
+.justify-around {
+    display: flex;
+    justify-content: space-around
+}
+
+.justify-between {
+    display: flex;
+    justify-content: space-between
+}
+
+.justify-center {
+    display: flex;
+    justify-content: center
+}
