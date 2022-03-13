@@ -191,7 +191,7 @@
       </swiper>
     </div>
 
-    <div class="core-advantage">
+    <div ref="coreAdvantage" class="core-advantage">
       <div class="head-block">
         <h1>核心优势</h1>
         <div class="org-line"></div>
@@ -199,28 +199,28 @@
       </div>
       <div class="block-list">
         <div class="item">
-          <div class="num">11+</div>
+          <div class="num">{{changeNumber1}}+</div>
           <div class="font-size-22">
             多<br>
             丰富的项目安利，涉及11个行业
           </div>
         </div>
         <div class="item">
-          <div class="num">15</div>
+          <div class="num">{{tweenedNumber2}}</div>
           <div class="font-size-22">
             快<br>
             标准化部署，15天快速交付
           </div>
         </div>
         <div class="item">
-          <div class="num">17</div>
+          <div class="num">{{tweenedNumber3}}</div>
           <div class="font-size-22">
             好<br>
             历经17年市场检验，好用、易用
           </div>
         </div>
         <div class="item">
-          <div class="num">17%</div>
+          <div class="num">{{tweenedNumber4}}%</div>
           <div class="font-size-22">
             省<br>
             节省7%，云部署，低投入，高性价比
@@ -277,6 +277,7 @@
 <script>
   import 'swiper/dist/css/swiper.css'
   import {swiper, swiperSlide} from 'vue-awesome-swiper'
+  import {TweenLite} from "gsap";
 
   export default {
     name: 'Home',
@@ -284,8 +285,27 @@
       swiper,
       swiperSlide
     },
+    computed: {
+      changeNumber1() {
+        return this.tweenedNumber1.toFixed(2);
+      },
+      changeNumber2() {
+        return this.tweenedNumber2.toFixed(2);
+      },
+      changeNumber3() {
+        return this.tweenedNumber3.toFixed(2);
+      },
+      changeNumber4() {
+        return this.tweenedNumber4.toFixed(2);
+      }
+    },
     data() {
       return {
+        tweenedNumber1: 0, //初始化数字，使数字归0
+        tweenedNumber2: 0, //初始化数字，使数字归0
+        tweenedNumber3: 0, //初始化数字，使数字归0
+        tweenedNumber4: 0, //初始化数字，使数字归0
+        NumberShow: false, //数字是否显示
         activeIndex: '1',
         activeName: '1',
         swiperOptions: {
@@ -389,10 +409,31 @@
           {name: '上海', class: ''},
           {name: '广州', class: ''},
           {name: '成都', class: ''},
-        ]
+        ],
+        scrollTop: 0
       };
     },
+    mounted() {
+      window.addEventListener('scroll', this.handleScroll, true)
+    },
     methods: {
+      handleScroll() {
+        this.scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        let offsetTop = this.$refs.coreAdvantage.offsetTop || 0
+
+        if (this.scrollTop > offsetTop && !this.NumberShow) {
+          this.initNum()
+        }
+
+        if (this.scrollTop < 1000) {
+          this.NumberShow = false
+          this.tweenedNumber1 = 0
+          this.tweenedNumber2 = 0
+          this.tweenedNumber3 = 0
+          this.tweenedNumber4 = 0
+        }
+
+      },
       handleClickNext() {
         this.$nextTick(() => {
           // console.log(this.$refs.mySwiper.swiper.activeIndex)
@@ -408,7 +449,46 @@
           this.applicationCaseTabsActiveIndex = index
           this.$refs.applicationCaseSwiper.swiper.slideTo(index);
         })
-      }
+      },
+      initNum() {
+        this.NumberShow = true
+        this.DigitalLoad1(11)
+        this.DigitalLoad2(15)
+        this.DigitalLoad3(17)
+        this.DigitalLoad4(17)
+      },
+      DigitalLoad1(value) {
+        if (this.NumberShow) {
+          // 0.5 为变化时间
+          TweenLite.to(this.$data, 0.5, {tweenedNumber1: value});
+        } else {
+          TweenLite.to(this.$data, 0.5, eval({tweenedNumber1: 0}));
+        }
+      },
+      DigitalLoad2(value) {
+        if (this.NumberShow) {
+          // 0.5 为变化时间
+          TweenLite.to(this.$data, 0.5, {tweenedNumber2: value});
+        } else {
+          TweenLite.to(this.$data, 0.5, eval({tweenedNumber2: 0}));
+        }
+      },
+      DigitalLoad3(value) {
+        if (this.NumberShow) {
+          // 0.5 为变化时间
+          TweenLite.to(this.$data, 0.5, {tweenedNumber3: value});
+        } else {
+          TweenLite.to(this.$data, 0.5, eval({tweenedNumber3: 0}));
+        }
+      },
+      DigitalLoad4(value) {
+        if (this.NumberShow) {
+          // 0.5 为变化时间
+          TweenLite.to(this.$data, 0.5, {tweenedNumber4: value});
+        } else {
+          TweenLite.to(this.$data, 0.5, eval({tweenedNumber4: 0}));
+        }
+      },
     }
   }
 </script>
