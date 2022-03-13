@@ -497,7 +497,7 @@
         }
 
         .text-content .box * {
-          transform: translate3d(0,-10px, 0);
+          transform: translate3d(0, -10px, 0);
           opacity: 1;
         }
 
@@ -619,6 +619,7 @@
       width: 390px;
       height: 431px;
       text-align: center;
+      overflow: hidden;
       /*margin-right: 26px;*/
     }
 
